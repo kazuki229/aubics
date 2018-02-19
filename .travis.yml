@@ -6,12 +6,13 @@ env:
     matrix:
         - OS=11.2 NAME='iPhone X'
 before_install:
-- brew update
-- brew outdated carthage || brew upgrade carthage
-before_script: 
+    - brew update
+    - brew outdated carthage || brew upgrade carthage
+script:
+    - xcodebuild -project Aubios.xcodeproj -scheme Aubios -destination "platform=iOS Simulator,OS=$OS,name=$NAME" build test
 before_deploy:
-- carthage build --no-skip-current
-- carthage archive Aubios
+    - carthage build --no-skip-current
+    - carthage archive Aubios
 notifications:
   slack:
     secure: hNEDofDf2JLX5EXla173pZrxfN0+GQvGvATRjMaeJJvbNcC5JGJ3uhV8MngRtMJz24SwxCq1gY8z3/i4FXOu7I5SZYBUL5bCbB0je0+tw1QYyJGEAki5bth1biSkPumME/72oNtzR2Fc0m5yTTvac/ArIE8S5zpAdlQfpBYGuFyUF+7uMqBEs8DeocIRFtIIX3YNsDtMJvF7upr++238tptrv8VBHVfh/wfbQZ/wGuWDEKX4BOj27IPBUd9dTYIDp0N2P8Z/t7gNu+tZPgHcSRoGvjAlN32S7ew8yQ5FP8jmZicqNbzDBA8czl9OCLcOnTQ6kQYthDIVgPoQuOB8AlOCtHle4Oqj8GyLI5vUxBpFvQrBebYscX/yDALiqYYKynX/Abhc6HsliICHl5/L0zmHnAJ3vihmroe8HXWBP+NvxAepRqyLMXObIx+lA7GwNJzCPx2Sp8/5+15Rr3UZC3cPLHc+4eqNAJnF184YqyiLOWFAwdP4dcwLKMbPBLV1Vzqb+RS2ISNTlswnyIh5im9DtClSp606uFSdFcVrVBYWcI65Y/dq68y01O67n5bxjoCQE13Iz9zoQ6SpW+Cq4UZXyiy6EIsw1jt1DIQS8vqPXJy/8k1D+WFZoLqIWaNs0JfnGk45shref9jsBR1HDEKiyLR2m4wBuCzgurjS1Q0=
